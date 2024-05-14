@@ -1,0 +1,30 @@
+/joy_teleop:
+  ros__parameters:
+    move:
+      type: topic
+      interface_type: geometry_msgs/msg/Twist
+      topic_name: /cmd_vel
+      deadman_buttons: [0]
+      axis_mappings:
+        linear-x:
+          axis: 1
+          scale: 1.0
+          offset: 0
+        angular-z:
+          axis: 0
+          scale: 2.0
+          offset: 0
+    pan_tilt:
+      type: topic
+      interface_type: geometry_msgs/msg/Vector3
+      topic_name: /cmd_joint_vel
+      deadman_buttons: [0]
+      axis_mappings:
+        y:
+          axis: 4
+          scale: 2.0
+          offset: 0
+        z:
+          axis: 3
+          scale: 2.0
+          offset: 0

@@ -1,0 +1,7 @@
+<launch>
+  <node pkg="joy" exec="joy_node" name="joy" respawn="true"/>
+  <node pkg="joy_teleop" exec="joy_teleop" name="joy_teleop">
+    <param from=
+       "$(find-pkg-share choreonoid_ros2_mobile_robot_tutorial)/config/joy_teleop_all.yaml"/>
+  </node>
+</launch>

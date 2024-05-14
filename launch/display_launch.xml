@@ -1,0 +1,19 @@
+<launch>
+  <arg name="model"
+    default="$(find-pkg-share choreonoid_ros2_mobile_robot_tutorial)/model/mobile_robot_sensors.urdf"/>
+  <arg name="rvizconfig"
+    default="$(find-pkg-share choreonoid_ros2_mobile_robot_tutorial)/config/mobile_robot.rviz"/>
+
+  <!-- robot state publisher -->
+  <node pkg="robot_state_publisher" exec="robot_state_publisher">
+    <param name="robot_description" value="$(command 'xacro $(var model)')"/>
+    <param name="use_sim_time" value="true" />
+    <remap from="/joint_states" to="/MobileRobot/joint_states"/>
+  </node>
+
+  <!-- rviz2 -->
+  <node pkg="rviz2" exec="rviz2" args="-d $(var rvizconfig)">
+    <param name="use_sim_time" value="true" />
+  </node>
+  <node pkg="rqt_graph" exec="rqt_graph"/>
+</launch>

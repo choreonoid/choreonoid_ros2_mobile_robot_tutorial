@@ -1,0 +1,106 @@
+format: ChoreonoidBody
+format_version: 2.0
+angle_unit: degree
+name: MobileRobot
+root_link: Chassis
+
+links:
+  -
+    name: Chassis
+    joint_type: free
+    center_of_mass: [ -0.08, 0, 0.08 ]
+    mass: 14.0
+    inertia: [ 0.1,   0,     0,
+               0,     0.17,  0,
+               0,     0,     0.22 ]
+    material: Slider
+    elements:
+      -
+        type: Resource
+        uri: "../meshes/vmega_body.dae"
+  -
+    name: RightWheel
+    parent: Chassis
+    translation: [ 0, -0.145, 0.076 ]
+    joint_type: revolute
+    joint_id: 0
+    joint_axis: [ 0, 1, 0 ]
+    center_of_mass: [ 0, 0, 0 ]
+    mass: 0.8
+    inertia: [ 0.0012, 0,      0,
+               0,      0.0023, 0,
+               0,      0,      0.0012 ]
+    material: Tire
+    elements:
+      -
+        type: Resource
+        uri: "../meshes/vmega_wheel.dae"
+  -
+    name: LeftWheel
+    parent: Chassis
+    translation: [ 0, 0.145, 0.076 ]
+    joint_type: revolute
+    joint_id: 1
+    joint_axis: [ 0, 1, 0 ]
+    center_of_mass: [ 0, 0, 0 ]
+    mass: 0.8
+    inertia: [ 0.0012, 0,      0,
+               0,      0.0023, 0,
+               0,      0,      0.0012 ]
+    material: Tire
+    elements:
+      -
+        type: Resource
+        uri: "../meshes/vmega_wheel.dae"
+        rotation: [ 0, 0, 1, 180 ]
+  -
+    name: PanLink
+    parent: Chassis
+    translation: [ -0.02, 0, 0.165 ]
+    joint_name: PanJoint
+    joint_type: revolute
+    joint_id: 2
+    joint_axis: [ 0, 0, 1 ]
+    center_of_mass: [ 0, 0, 0.03 ]
+    mass: 1.0
+    inertia: [ 0.002, 0,     0,
+               0,     0.002, 0,
+               0,     0,     0.003 ]
+    elements:
+      - 
+        type: Shape
+        translation: [ 0, 0, 0.01 ]
+        rotation: [ 1, 0, 0, 90 ]
+        geometry: { type: Cylinder, radius: 0.08, height: 0.02 }
+        appearance: &GRAY
+          material: { diffuse: [ 0.5, 0.5, 0.5 ] }
+      -
+        type: Transform
+        translation: [ 0, 0.07, 0.065 ]
+        elements: 
+          - &PanFrame
+            type: Shape
+            geometry: { type: Box, size: [ 0.02, 0.02, 0.13 ] }
+            appearance: *GRAY
+      -
+        type: Transform
+        translation: [ 0, -0.07, 0.065 ]
+        elements: *PanFrame
+  -
+    name: TiltLink
+    parent: PanLink
+    translation: [ 0, 0, 0.12 ]
+    joint_name: TiltJoint
+    joint_type: revolute
+    joint_id: 3
+    joint_axis: [ 0, 1, 0 ]
+    mass: 1.0
+    inertia: [ 0.001, 0,     0,
+               0,     0.001, 0,
+               0,     0,     0.002 ]
+    elements:
+      -
+        type: Shape
+        rotation: [ 1, 0, 0, 90 ]
+        geometry: { type: Cylinder, radius: 0.06, height: 0.02 }
+        appearance: *GRAY

@@ -1,0 +1,193 @@
+format: ChoreonoidBody
+format_version: 2.0
+angle_unit: degree
+name: MobileRobot
+root_link: Chassis
+
+links:
+  -
+    name: Chassis
+    joint_type: free
+    center_of_mass: [ -0.08, 0, 0.08 ]
+    mass: 14.0
+    inertia: [ 0.1,   0,     0,
+               0,     0.17,  0,
+               0,     0,     0.22 ]
+    material: Slider
+    elements:
+      -
+        type: Resource
+        uri: "../meshes/vmega_body.dae"
+  -
+    name: RightWheel
+    parent: Chassis
+    translation: [ 0, -0.145, 0.076 ]
+    joint_type: revolute
+    joint_id: 0
+    joint_axis: [ 0, 1, 0 ]
+    center_of_mass: [ 0, 0, 0 ]
+    mass: 0.8
+    inertia: [ 0.0012, 0,      0,
+               0,      0.0023, 0,
+               0,      0,      0.0012 ]
+    material: Tire
+    elements:
+      -
+        type: Resource
+        uri: "../meshes/vmega_wheel.dae"
+  -
+    name: LeftWheel
+    parent: Chassis
+    translation: [ 0, 0.145, 0.076 ]
+    joint_type: revolute
+    joint_id: 1
+    joint_axis: [ 0, 1, 0 ]
+    center_of_mass: [ 0, 0, 0 ]
+    mass: 0.8
+    inertia: [ 0.0012, 0,      0,
+               0,      0.0023, 0,
+               0,      0,      0.0012 ]
+    material: Tire
+    elements:
+      -
+        type: Resource
+        uri: "../meshes/vmega_wheel.dae"
+        rotation: [ 0, 0, 1, 180 ]
+  -
+    name: PanLink
+    parent: Chassis
+    translation: [ -0.02, 0, 0.165 ]
+    joint_name: PanJoint
+    joint_type: revolute
+    joint_id: 2
+    joint_axis: [ 0, 0, 1 ]
+    center_of_mass: [ 0, 0, 0.03 ]
+    mass: 1.0
+    inertia: [ 0.002, 0,     0,
+               0,     0.002, 0,
+               0,     0,     0.003 ]
+    elements:
+      - 
+        type: Shape
+        translation: [ 0, 0, 0.01 ]
+        rotation: [ 1, 0, 0, 90 ]
+        geometry: { type: Cylinder, radius: 0.08, height: 0.02 }
+        appearance: &GRAY
+          material: { diffuse: [ 0.5, 0.5, 0.5 ] }
+      -
+        type: Transform
+        translation: [ 0, 0.07, 0.065 ]
+        elements: 
+          - &PanFrame
+            type: Shape
+            geometry: { type: Box, size: [ 0.02, 0.02, 0.13 ] }
+            appearance: *GRAY
+      -
+        type: Transform
+        translation: [ 0, -0.07, 0.065 ]
+        elements: *PanFrame
+  -
+    name: TiltLink
+    parent: PanLink
+    translation: [ 0, 0, 0.12 ]
+    joint_name: TiltJoint
+    joint_type: revolute
+    joint_id: 3
+    joint_axis: [ 0, 1, 0 ]
+    mass: 1.0
+    inertia: [ 0.001, 0,     0,
+               0,     0.001, 0,
+               0,     0,     0.002 ]
+    elements:
+      -
+        type: Shape
+        rotation: [ 1, 0, 0, 90 ]
+        geometry: { type: Cylinder, radius: 0.06, height: 0.02 }
+        appearance: *GRAY
+
+      # sensors
+      -
+        type: Transform
+        translation: [ 0, 0, 0.04585 ]
+        elements:
+          -
+            type: RangeSensor
+            name: VLP_16
+            optical_frame: robotics
+            yaw_range: 360.0
+            yaw_step:  0.4
+            pitch_range: 30.0
+            pitch_step: 2.0
+            scan_rate:  20
+            max_distance: 100.0
+            detection_rate: 0.9
+            error_deviation: 0.01
+          -
+            type: Shape
+            rotation: [ 1, 0, 0, 90 ]
+            geometry: { type: Cylinder, radius: 0.05165, height: 0.0717 }
+            appearance:
+              material: { diffuse: [ 0, 0, 1 ], specular: [ 1, 1, 1 ] }
+      -
+        type: Transform
+        translation: [ 0.06, 0, -0.02 ]
+        elements:
+          -
+            type: Camera
+            name: RealSense
+            optical_frame: robotics
+            format: COLOR_DEPTH
+            field_of_view: 62
+            width: 320
+            height: 240
+            frame_rate: 30
+            detection_rate: 0.9
+            error_deviation: 0.005
+          -
+            type: Transform
+            translation: [ -0.012, 0, 0 ]
+            elements:
+              -
+                type: Shape
+                geometry: { type: Box, size: [ 0.024, 0.064, 0.022 ] }
+                appearance: &SILVER
+                  material: { diffuse: [ 0.8, 0.8, 0.8 ], specular: [ 1, 1, 1 ] }
+              -
+                type: Transform
+                translation: [ 0, 0.032, 0 ]
+                elements:
+                  - &REAL_SENSE_SIDE
+                    type: Shape
+                    rotation: [ 0, 0, 1, 90 ]
+                    geometry: { type: Cylinder, radius: 0.011, height: 0.024 }
+                    appearance: *SILVER
+              -
+                type: Transform
+                translation: [ 0, -0.032, 0 ]
+                elements: *REAL_SENSE_SIDE
+
+      # light
+      -
+        type: Transform
+        translation: [ 0.065, 0, 0 ]
+        elements:
+          -
+            type: SpotLight
+            name: Light
+            direction: [ 1, 0, 0 ]
+            beam_width: 36
+            cut_off_angle: 40
+            cut_off_exponent: 6
+            attenuation: [ 1, 0, 0.01 ]
+            on: true
+          -
+            type: Shape
+            translation: [ -0.005, 0, 0 ]
+            rotation: [ 0, 0, 1, 90 ]
+            geometry:
+              type: Cylinder
+              radius: 0.008
+              height: 0.01
+            appearance:
+              material:
+                diffuse: [ 1, 1, 0 ]

@@ -1,0 +1,55 @@
+format: ChoreonoidBody
+format_version: 2.0
+angle_unit: degree
+name: MobileRobot
+root_link: Chassis
+
+links:
+  -
+    name: Chassis
+    joint_type: free
+    center_of_mass: [ -0.08, 0, 0.08 ]
+    mass: 14.0
+    inertia: [ 0.1,   0,     0,
+               0,     0.17,  0,
+               0,     0,     0.22 ]
+    material: Slider
+    elements:
+      -
+        type: Resource
+        uri: "../meshes/vmega_body.dae"
+  -
+    name: LeftWheel
+    parent: Chassis
+    translation: [ 0, 0.145, 0.076 ]
+    joint_type: revolute
+    joint_id: 0
+    joint_axis: [ 0, 1, 0 ]
+    center_of_mass: [ 0, 0, 0 ]
+    mass: 0.8
+    inertia: [ 0.0012, 0,      0,
+               0,      0.0023, 0,
+               0,      0,      0.0012 ]
+    material: Tire
+    elements:
+      -
+        type: Resource
+        uri: "../meshes/vmega_wheel.dae"
+        rotation: [ 0, 0, 1, 180 ]
+  -
+    name: RightWheel
+    parent: Chassis
+    translation: [ 0, -0.145, 0.076 ]
+    joint_type: revolute
+    joint_id: 1
+    joint_axis: [ 0, 1, 0 ]
+    center_of_mass: [ 0, 0, 0 ]
+    mass: 0.8
+    inertia: [ 0.0012, 0,      0,
+               0,      0.0023, 0,
+               0,      0,      0.0012 ]
+    material: Tire
+    elements:
+      -
+        type: Resource
+        uri: "../meshes/vmega_wheel.dae"

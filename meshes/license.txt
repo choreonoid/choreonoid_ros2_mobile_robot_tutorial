@@ -1,0 +1,11 @@
+The files in this directory were obtained from the following repositories:
+
+https://github.com/vstoneofficial/megarover_samples
+maintainer: Vstone
+license: MIT
+
+https://github.com/IntelRealSense/realsense-ros
+maintainer: LibRealSense ROS Team
+license: Apache License 2.0
+
+Note that the number of faces were reduced from the original files.

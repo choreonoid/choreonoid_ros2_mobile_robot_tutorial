@@ -1,0 +1,4 @@
+<launch>
+  <include file="$(find-pkg-share choreonoid_ros2_mobile_robot_tutorial)/launch/joy_teleop_launch.xml"/>
+  <node pkg="choreonoid_ros" exec="choreonoid" args="--start-simulation $(find-pkg-share choreonoid_ros2_mobile_robot_tutorial)/project/mobile_robot_drive_pantilt_control.cnoid"/>
+</launch>

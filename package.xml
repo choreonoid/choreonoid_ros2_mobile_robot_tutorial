@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>choreonoid_ros2_mobile_robot_tutorial</name>
+  <version>1.0.0</version>
+  <description>Choreonoid + ROS 2 simulation tutorial using a mobile robot</description>
+  <maintainer email="nakaoka@choreonoid.co.jp">Shin'ichiro Nakaoka</maintainer>
+  <license>MIT</license>
+  <author email="nakaoka@choreonoid.co.jp">Shin'ichiro Nakaoka</author>
+  <author email="yuki.st16@gmail.com">Yuki Onishi</author>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>choreonoid</depend>
+  <depend>choreonoid_ros</depend>
+  <depend>rclcpp</depend>
+  <depend>geometry_msgs</depend>
+
+  <exec_depend>joy</exec_depend>
+  <exec_depend>joy_teleop</exec_depend>
+  <exec_depend>rqt_robot_steering</exec_depend>
+  <exec_depend>xacro</exec_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
