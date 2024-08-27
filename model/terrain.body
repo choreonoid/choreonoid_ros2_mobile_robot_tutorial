@@ -1,0 +1,81 @@
+format: ChoreonoidBody
+formatVersion: 1.0
+name: Terrain
+links:
+  -
+    name: Ground
+    translation: [ 0, 0, -0.1 ]
+    jointType: fixed
+    material: Ground
+    elements:
+      Shape:
+        geometry: { type: Box, size: [ 10.0, 10.0, 0.2 ] }
+        appearance:
+          material:
+            diffuseColor: [ 0.5, 0.5, 0.5 ]
+  -
+    name: object1
+    parent: Ground
+    translation: [ 1, 2, 0 ]
+    jointType: fixed
+    material: Ground
+    elements:
+      Shape:
+        geometry: { type: Cylinder, height: 0.8, radius: 0.4 }
+        rotation: [ 1, 0, 0, 90 ]
+        translation: [ 0, 0, 0.4 ]
+        appearance:
+          material:
+            diffuseColor: [ 0.0, 0.2, 1.0 ]
+  -
+    name: object2
+    parent: Ground
+    translation: [ -2, 1, 0 ]
+    jointType: fixed
+    material: Ground
+    elements:
+      Shape:
+        geometry: { type: Cylinder, height: 0.8, radius: 0.6 }
+        rotation: [ 0, 0, 1, -30 ]
+        appearance:
+          material:
+            diffuseColor: [ 1.0, 0.2, 0.2 ]
+  -
+    name: object3
+    parent: Ground
+    translation: [ 1, -2, 0 ]
+    jointType: fixed
+    material: Ground
+    elements:
+      Shape:
+        geometry: { type: Sphere, radius: 0.5 }
+        appearance:
+          material:
+            diffuseColor: [ 1.0, 0.0, 0.9 ]
+  -
+    name: object4
+    parent: Ground
+    translation: [ 2, 0, 0 ]
+    jointType: fixed
+    material: Ground
+    elements:
+      Shape:
+        rotation: [ 1, 0, 0, 90 ]
+        translation: [ 0, 0, 0.4 ]
+        geometry: { type: Cone, radius: 0.5, height: 0.8 }
+        appearance:
+          material:
+            diffuseColor: [ 1.0, 1.0, 0.0 ]
+  -
+    name: object5
+    parent: Ground
+    translation: [ -1.5, -2, 0 ]
+    jointType: fixed
+    material: Ground
+    elements:
+      Shape:
+        rotation: [ 0, 0, 1, 20 ]
+        geometry: { type: Capsule, radius: 0.6, height: 0.8 }
+        appearance:
+          material:
+            diffuseColor: [ 0.3, 1.0, 0.30 ]
