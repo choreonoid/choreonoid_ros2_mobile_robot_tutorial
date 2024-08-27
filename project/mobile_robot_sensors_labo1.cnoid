@@ -24,19 +24,18 @@ items:
           data:
             file: "../model/mobile_robot_sensors.body"
             format: CHOREONOID-BODY
-            rootPosition: [ 0, 0, 0 ]
+            rootPosition: [ 7.29393695e-05, -3.18283567e-07, -0.000250036453 ]
             rootAttitude: [
-              1, 0, 0,
-              0, 1, 0,
-              0, 0, 1 ]
-            jointDisplacements: [ 0, 0, 0, 0 ]
-            jointPositions: [ 0, 0, 0, 0 ]
+              1, 1.35633948e-05, 1.44677819e-07,
+              -1.35633948e-05, 1, 2.56477131e-08,
+              -1.44677471e-07, -2.56496754e-08, 1 ]
+            jointDisplacements: [ 0.0580344, 0.0551175, -6.37408e-08, 3.57676e-08 ]
+            initialJointDisplacements: [ 0, 0, 0, 0 ]
             initialRootPosition: [ 0, 0, 0 ]
             initialRootAttitude: [
               1, 0, 0,
               0, 1, 0,
               0, 0, 1 ]
-            initialJointPositions: [ 0, 0 ]
             fix_root: false
             collisionDetection: true
             selfCollisionDetection: false
@@ -86,12 +85,10 @@ items:
                   -
                     class: CameraImageVisualizerItem
                     name: RealSense-Image
-                    is_checked: true
                   -
                     class: PointCloudVisualizerItem
                     name: RealSense
-                    is_checked: true
-                    translation: [ 0.04, 0, 0.265 ]
+                    translation: [ 0, 0, 0 ]
                     rotation: [ 1, 0, 0, 0 ]
                     angle_unit: degree
                     rendering_mode: Point
@@ -100,9 +97,8 @@ items:
                     is_editable: false
                   -
                     class: RangeSensorVisualizerItem
-                    name: VLP_16
-                    is_checked: true
-                    translation: [ -0.02, 0, 0.33085 ]
+                    name: LiDAR
+                    translation: [ 0, 0, 0 ]
                     rotation: [ 1, 0, 0, 0 ]
                     angle_unit: degree
                     rendering_mode: Point
@@ -110,7 +106,7 @@ items:
                     voxel_size: 0.01
                     is_editable: false
         -
-          id: 7
+          id: 8
           name: "Labo1"
           plugin: Body
           class: BodyItem
@@ -123,14 +119,13 @@ items:
               1, 0, 0,
               0, 1, 0,
               0, 0, 1 ]
-            jointDisplacements: [ 0 ]
-            jointPositions: [ 0 ]
+            jointDisplacements: [ -4.07111e-16 ]
+            initialJointDisplacements: [ 0 ]
             initialRootPosition: [ 0, 0, -0.1 ]
             initialRootAttitude: [
               1, 0, 0,
               0, 1, 0,
               0, 0, 1 ]
-            initialJointPositions: [ 0 ]
             fix_root: true
             collisionDetection: true
             selfCollisionDetection: false
@@ -138,7 +133,7 @@ items:
             scene_sensitive: true
             zmp: [ 0, 0, 0 ]
         -
-          id: 8
+          id: 10
           name: "AISTSimulator"
           plugin: Body
           class: AISTSimulatorItem
@@ -155,6 +150,7 @@ items:
             record_collision_data: false
             controller_options: ""
             block_scene_view_edit_mode: false
+            time_sync_items: [ 7, 9 ]
             dynamicsMode: "Forward dynamics"
             integrationMode: runge-kutta
             gravity: [ 0, 0, -9.80665 ]
@@ -171,7 +167,7 @@ items:
             oldAccelSensorMode: false
           children:
             -
-              id: 9
+              id: 11
               name: "GLVisionSimulator"
               plugin: Body
               class: GLVisionSimulatorItem
@@ -189,7 +185,7 @@ items:
                 enable_additional_lights: true
                 antialiasing: false
         -
-          id: 10
+          id: 12
           name: "WorldROS2"
           plugin: ROS2
           class: WorldROS2Item
@@ -202,8 +198,6 @@ views:
     plugin: Base
     class: ImageView
     mounted: true
-    state:
-      imageable_item: [ 6, "RealSense-Image" ]
   -
     id: 1
     plugin: Base
@@ -215,7 +209,7 @@ views:
     class: ItemTreeView
     mounted: true
     state:
-      expanded: [ 1, 2, 6, 8 ]
+      expanded: [ 1, 2, 6, 8, 10 ]
   -
     id: 3
     plugin: Base
@@ -247,9 +241,9 @@ views:
         -
           camera: [ System, Perspective ]
           isCurrent: true
-          eye: [ 3, 1.5, 1.2 ]
-          direction: [ -0.880451, -0.440225, -0.17609 ]
-          up: [ -0.1575, -0.0787499, 0.984374 ]
+          eye: [ 4.73883, 1.9907, 2.20501 ]
+          direction: [ -0.841113, -0.420556, -0.34009 ]
+          up: [ -0.304186, -0.152093, 0.940393 ]
         -
           camera: [ System, Orthographic ]
           orthoHeight: 20
@@ -332,7 +326,7 @@ toolbars:
   "TimeBar":
     current_time: 0
     min_time: 0
-    max_time: 30
+    max_time: 30.053
     frame_rate: 1000
     playback_frame_rate: 60
     idle_loop_driven_mode: false
@@ -372,7 +366,7 @@ Body:
         show_cm_projection: false
         show_zmp: false
       -
-        body_item: 7
+        body_item: 8
         show_cm: false
         show_cm_projection: false
         show_zmp: false
@@ -398,7 +392,7 @@ viewAreas:
             -
               type: splitter
               orientation: vertical
-              sizes: [ 735, 735 ]
+              sizes: [ 694, 694 ]
               children:
                 -
                   type: pane
@@ -410,7 +404,7 @@ viewAreas:
             -
               type: splitter
               orientation: vertical
-              sizes: [ 1103, 367 ]
+              sizes: [ 1041, 347 ]
               children:
                 -
                   type: pane
@@ -430,7 +424,7 @@ viewAreas:
         -
           type: splitter
           orientation: vertical
-          sizes: [ 335, 1135 ]
+          sizes: [ 316, 1072 ]
           children:
             -
               type: pane
@@ -438,7 +432,7 @@ viewAreas:
             -
               type: splitter
               orientation: vertical
-              sizes: [ 456, 675 ]
+              sizes: [ 431, 637 ]
               children:
                 -
                   type: pane

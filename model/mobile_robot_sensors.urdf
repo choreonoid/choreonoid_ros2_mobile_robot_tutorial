@@ -128,56 +128,10 @@
     <axis xyz="0 1 0"/>
   </joint>
 
-  <!-- transmissions for ros_control -->
-  <transmission name="RightWheelTrans">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="RightWheel">
-      <hardwareInterface>VelocityJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="RightWheelMotor">
-      <mechanicalReduction>1</mechanicalReduction>
-      <hardwareInterface>VelocityJointInterface</hardwareInterface>
-    </actuator>
-  </transmission>
-
-  <transmission name="LeftWheelTrans">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="LeftWheel">
-      <hardwareInterface>VelocityJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="LeftWheelMotor">
-      <mechanicalReduction>1</mechanicalReduction>
-      <hardwareInterface>VelocityJointInterface</hardwareInterface>
-    </actuator>
-  </transmission>
-
-  <transmission name="PanJointTrans">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="PanJoint">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="PanJointMotor">
-      <mechanicalReduction>1</mechanicalReduction>
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
-    </actuator>
-  </transmission>
-
-  <transmission name="TiltJointTrans">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="TiltJoint">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="TiltJointMotor">
-      <mechanicalReduction>1</mechanicalReduction>
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
-    </actuator>
-  </transmission>
-
-  <!-- VLP-16 -->
-  <link name="VLP_16">
+  <link name="LiDAR">
     <visual>
       <geometry>
-        <cylinder radius="0.05165" length="0.0717"/>
+        <cylinder radius="0.05" length="0.03"/>
       </geometry>
       <material name="blue">
         <color rgba="0 0 1 1"/>
@@ -185,40 +139,30 @@
     </visual>
   </link>
 
-  <joint name="VLP_16FixedJoint" type="fixed">
-    <origin xyz="0 0 0.04585"/>
+  <joint name="LiDARFixedJoint" type="fixed">
+    <origin xyz="0 0 0.025"/>
     <parent link="TiltLink"/>
-    <child link="VLP_16"/>
+    <child link="LiDAR"/>
   </joint>
 
-  <sensor name="VLP_16" update_rate="20">
-    <parent link="VLP_16"/>
-    <ray>
-      <horizontal samples="900" resolution="1" min_angle="0" max_angle="6.28"/>
-      <vertical samples="16" resolution="1" min_angle="0" max_angle="0.52"/>
-    </ray>
-  </sensor>
-
-  <!-- RealSense -->
   <link name="RealSense">
     <visual>
-      <origin xyz="-0.012 0 0"/>
       <geometry>
-        <box size="0.024 0.064 0.022"/>
+        <box size="0.064 0.022 0.024"/>
       </geometry>
       <material name="silver">
         <color rgba="0.8 0.8 0.8 1" />
       </material>
     </visual>
     <visual>
-      <origin xyz="-0.012 0.032 0" rpy="0 1.5707963267948966 0"/>
+      <origin xyz="0.032 0 0"/>
       <geometry>
         <cylinder radius="0.011" length="0.024"/>
       </geometry>
       <material name="silver" />
     </visual>
     <visual>
-      <origin xyz="-0.012 -0.032 0" rpy="0 1.5707963267948966 0"/>
+      <origin xyz="-0.032 0 0"/>
       <geometry>
         <cylinder radius="0.011" length="0.024"/>
       </geometry>
@@ -232,11 +176,4 @@
     <origin xyz="0.06 0 -0.02" rpy="-1.57 0 -1.57"/>
   </joint>
 
-  <sensor name="RealSense" update_rate="30">
-    <parent link="RealSense"/>
-    <camera>
-      <image width="320" height="240" depth_format="mono16" format="rgb8" hfov="1.19" near="0.01"
-        far="100"/>
-    </camera>
-  </sensor>
 </robot>
