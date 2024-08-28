@@ -16,12 +16,31 @@ links:
     material: Slider
     elements:
       -
-        type: Resource
-        uri: "../meshes/vmega_body.dae"
+        type: Visual
+        elements:
+          -
+            type: Resource
+            uri: "../meshes/vmega_body.dae"
+      -
+        type: Collision
+        elements:
+          -
+            type: Shape
+            translation: [ -0.1, 0, 0.0975 ]
+            geometry:
+              type: Box
+              size: [ 0.36, 0.24, 0.135 ]
+          -
+            type: Shape
+            translation: [ -0.255, 0, 0.02 ]
+            geometry:
+              type: Cylinder
+              height: 0.01
+              radius: 0.02
   -
-    name: RightWheel
+    name: LeftWheel
     parent: Chassis
-    translation: [ 0, -0.145, 0.076 ]
+    translation: [ 0, 0.145, 0.076 ]
     joint_type: revolute
     joint_id: 0
     joint_axis: [ 0, 1, 0 ]
@@ -33,12 +52,26 @@ links:
     material: Tire
     elements:
       -
-        type: Resource
-        uri: "../meshes/vmega_wheel.dae"
+        type: Visual
+        elements:
+          -
+            type: Resource
+            uri: "../meshes/vmega_wheel.dae"
+            rotation: [ 0, 0, 1, 180 ]
+      -
+        type: Collision
+        elements:
+          - &TireShape
+            type: Shape
+            geometry:
+              type: Cylinder
+              height: 0.03
+              radius: 0.076
+              division_number: 60
   -
-    name: LeftWheel
+    name: RightWheel
     parent: Chassis
-    translation: [ 0, 0.145, 0.076 ]
+    translation: [ 0, -0.145, 0.076 ]
     joint_type: revolute
     joint_id: 1
     joint_axis: [ 0, 1, 0 ]
@@ -50,9 +83,15 @@ links:
     material: Tire
     elements:
       -
-        type: Resource
-        uri: "../meshes/vmega_wheel.dae"
-        rotation: [ 0, 0, 1, 180 ]
+        type: Visual
+        elements:
+          -
+            type: Resource
+            uri: "../meshes/vmega_wheel.dae"
+      -
+        type: Collision
+        elements:
+          - *TireShape
   -
     name: PanLink
     parent: Chassis
@@ -108,11 +147,11 @@ links:
       # sensors
       -
         type: Transform
-        translation: [ 0, 0, 0.04585 ]
+        translation: [ 0, 0, 0.025 ]
         elements:
           -
             type: RangeSensor
-            name: VLP_16
+            name: LiDAR
             optical_frame: robotics
             yaw_range: 360.0
             yaw_step:  0.4
@@ -121,21 +160,22 @@ links:
             scan_rate:  20
             max_distance: 100.0
             detection_rate: 0.9
-            error_deviation: 0.01
+            error_deviation: 0.005
           -
             type: Shape
             rotation: [ 1, 0, 0, 90 ]
-            geometry: { type: Cylinder, radius: 0.05165, height: 0.0717 }
+            geometry: { type: Cylinder, radius: 0.05, height: 0.03 }
             appearance:
               material: { diffuse: [ 0, 0, 1 ], specular: [ 1, 1, 1 ] }
       -
         type: Transform
         translation: [ 0.06, 0, -0.02 ]
+        rotation: [ [ 0, 1, 0, 90 ], [ 0, 0, 1, -90 ] ]
         elements:
           -
             type: Camera
             name: RealSense
-            optical_frame: robotics
+            optical_frame: cv
             format: COLOR_DEPTH
             field_of_view: 62
             width: 320
@@ -149,45 +189,19 @@ links:
             elements:
               -
                 type: Shape
-                geometry: { type: Box, size: [ 0.024, 0.064, 0.022 ] }
+                geometry: { type: Box, size: [ 0.064, 0.022, 0.024 ] }
                 appearance: &SILVER
                   material: { diffuse: [ 0.8, 0.8, 0.8 ], specular: [ 1, 1, 1 ] }
               -
                 type: Transform
-                translation: [ 0, 0.032, 0 ]
+                translation: [ 0.032, 0, 0 ]
                 elements:
                   - &REAL_SENSE_SIDE
                     type: Shape
-                    rotation: [ 0, 0, 1, 90 ]
+                    rotation: [ 1, 0, 0, 90 ]
                     geometry: { type: Cylinder, radius: 0.011, height: 0.024 }
                     appearance: *SILVER
               -
                 type: Transform
-                translation: [ 0, -0.032, 0 ]
+                translation: [ -0.032 ,0, 0 ]
                 elements: *REAL_SENSE_SIDE
-
-      # light
-      -
-        type: Transform
-        translation: [ 0.065, 0, 0 ]
-        elements:
-          -
-            type: SpotLight
-            name: Light
-            direction: [ 1, 0, 0 ]
-            beam_width: 36
-            cut_off_angle: 40
-            cut_off_exponent: 6
-            attenuation: [ 1, 0, 0.01 ]
-            on: true
-          -
-            type: Shape
-            translation: [ -0.005, 0, 0 ]
-            rotation: [ 0, 0, 1, 90 ]
-            geometry:
-              type: Cylinder
-              radius: 0.008
-              height: 0.01
-            appearance:
-              material:
-                diffuse: [ 1, 1, 0 ]
