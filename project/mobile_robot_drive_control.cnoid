@@ -30,13 +30,11 @@ items:
               0, 1, 0,
               0, 0, 1 ]
             jointDisplacements: [ 0, 0 ]
-            jointPositions: [ 0, 0 ]
             initialRootPosition: [ 0, 0, 0 ]
             initialRootAttitude: [
               1, 0, 0,
               0, 1, 0,
               0, 0, 1 ]
-            initialJointPositions: [ 0, 0 ]
             fix_root: false
             collisionDetection: true
             selfCollisionDetection: false
@@ -57,7 +55,7 @@ items:
                 reloading: false
                 export_symbols: false
         -
-          id: 5
+          id: 4
           name: "Floor"
           plugin: Body
           class: BodyItem
@@ -70,7 +68,6 @@ items:
               1, 0, 0,
               0, 1, 0,
               0, 0, 1 ]
-            jointPositions: [ ]
             initialRootPosition: [ 0, 0, -0.1 ]
             initialRootAttitude: [
               1, 0, 0,
@@ -83,14 +80,14 @@ items:
             scene_sensitive: true
             zmp: [ 0, 0, 0 ]
         -
-          id: 6
+          id: 5
           name: "AISTSimulator"
           plugin: Body
           class: AISTSimulatorItem
           data:
             time_step: 0.002
             realtime_sync_mode: compensatory
-            recording: full
+            recording: tail
             time_range_mode: unlimited
             time_length: 180
             is_active_control_time_range_mode: false
@@ -100,7 +97,6 @@ items:
             record_collision_data: false
             controller_options: ""
             block_scene_view_edit_mode: false
-            time_sync_items: [ 4 ]
             dynamicsMode: "Forward dynamics"
             integrationMode: semi-implicit_euler
             gravity: [ 0, 0, -9.80665 ]
@@ -127,7 +123,7 @@ views:
     class: ItemTreeView
     mounted: true
     state:
-      expanded: [ 1, 2, 3, 5 ]
+      expanded: [ 1, 2, 3, 4 ]
   -
     id: 2
     plugin: Base
@@ -284,7 +280,7 @@ Body:
         show_cm_projection: false
         show_zmp: false
       -
-        body_item: 5
+        body_item: 4
         show_cm: false
         show_cm_projection: false
         show_zmp: false
@@ -300,17 +296,17 @@ viewAreas:
     contents:
       type: splitter
       orientation: horizontal
-      sizes: [ 1941, 615 ]
+      sizes: [ 1087, 345 ]
       children:
         -
           type: splitter
           orientation: horizontal
-          sizes: [ 541, 1396 ]
+          sizes: [ 302, 781 ]
           children:
             -
               type: splitter
               orientation: vertical
-              sizes: [ 736, 734 ]
+              sizes: [ 447, 446 ]
               children:
                 -
                   type: pane
@@ -322,7 +318,7 @@ viewAreas:
             -
               type: splitter
               orientation: vertical
-              sizes: [ 1103, 367 ]
+              sizes: [ 670, 223 ]
               children:
                 -
                   type: pane
@@ -334,7 +330,7 @@ viewAreas:
         -
           type: splitter
           orientation: vertical
-          sizes: [ 404, 1066 ]
+          sizes: [ 245, 648 ]
           children:
             -
               type: pane
@@ -342,7 +338,7 @@ viewAreas:
             -
               type: splitter
               orientation: vertical
-              sizes: [ 589, 473 ]
+              sizes: [ 357, 287 ]
               children:
                 -
                   type: pane

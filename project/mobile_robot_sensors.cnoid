@@ -134,7 +134,7 @@ items:
           data:
             time_step: 0.001
             realtime_sync_mode: compensatory
-            recording: full
+            recording: off
             time_range_mode: unlimited
             time_length: 180
             is_active_control_time_range_mode: false
@@ -231,7 +231,7 @@ views:
           isCurrent: true
           eye: [ 4.43531, 2.75965, 2.11931 ]
           direction: [ -0.751801, -0.575861, -0.321215 ]
-          up: [ -0.255004, -0.195327, 0.947006 ]
+          up: [ -0.255003, -0.195326, 0.947006 ]
         -
           camera: [ System, Orthographic ]
           orthoHeight: 20
@@ -380,7 +380,7 @@ viewAreas:
             -
               type: splitter
               orientation: vertical
-              sizes: [ 446, 446 ]
+              sizes: [ 447, 446 ]
               children:
                 -
                   type: pane
@@ -392,7 +392,7 @@ viewAreas:
             -
               type: splitter
               orientation: vertical
-              sizes: [ 669, 223 ]
+              sizes: [ 670, 223 ]
               children:
                 -
                   type: pane
@@ -412,7 +412,7 @@ viewAreas:
         -
           type: splitter
           orientation: vertical
-          sizes: [ 249, 643 ]
+          sizes: [ 249, 644 ]
           children:
             -
               type: pane
@@ -420,7 +420,7 @@ viewAreas:
             -
               type: splitter
               orientation: vertical
-              sizes: [ 357, 282 ]
+              sizes: [ 358, 282 ]
               children:
                 -
                   type: pane
