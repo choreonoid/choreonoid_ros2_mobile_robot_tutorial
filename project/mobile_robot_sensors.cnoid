@@ -24,12 +24,12 @@ items:
           data:
             file: "../model/mobile_robot_sensors.body"
             format: CHOREONOID-BODY
-            rootPosition: [ 7.29393695e-05, -3.18283567e-07, -0.000250036453 ]
+            rootPosition: [ 7.38378148e-05, -3.20896563e-07, -0.000245485587 ]
             rootAttitude: [
-              1, 1.35633948e-05, 1.44677819e-07,
-              -1.35633948e-05, 1, 2.56477131e-08,
-              -1.44677471e-07, -2.56496754e-08, 1 ]
-            jointDisplacements: [ 0.0580344, 0.0551175, -6.37408e-08, 3.57676e-08 ]
+              1, 1.48568295e-05, 2.29728826e-06,
+              -1.48568301e-05, 1, 2.46531398e-07,
+              -2.2972846e-06, -2.46565528e-07, 1 ]
+            jointDisplacements: [ 0.0590094, 0.0557961, -4.57102e-05, 5.67257e-06 ]
             initialJointDisplacements: [ 0, 0, 0, 0 ]
             initialRootPosition: [ 0, 0, 0 ]
             initialRootAttitude: [
@@ -45,14 +45,6 @@ items:
           children:
             -
               id: 3
-              name: "BodyROS2"
-              plugin: ROS2
-              class: BodyROS2Item
-              data:
-                body_ros_version: 0
-                joint_state_update_rate: 100
-            -
-              id: 4
               name: "DriveController"
               plugin: Body
               class: SimpleControllerItem
@@ -64,7 +56,7 @@ items:
                 reloading: false
                 export_symbols: false
             -
-              id: 5
+              id: 4
               name: "PanTiltController"
               plugin: Body
               class: SimpleControllerItem
@@ -76,7 +68,7 @@ items:
                 reloading: false
                 export_symbols: false
             -
-              id: 6
+              id: 5
               name: "SensorVisualizer"
               plugin: Body
               class: SensorVisualizerItem
@@ -85,11 +77,13 @@ items:
                   -
                     class: CameraImageVisualizerItem
                     name: RealSense-Image
+                    is_checked: true
                   -
                     class: PointCloudVisualizerItem
                     name: RealSense
-                    translation: [ 0, 0, 0 ]
-                    rotation: [ 1, 0, 0, 0 ]
+                    is_checked: true
+                    translation: [ 0.0400744, -8.97707e-07, 0.264754 ]
+                    rotation: [ -0.015566, 0.151292, -0.988367, 0.000907501 ]
                     angle_unit: degree
                     rendering_mode: Point
                     point_size: 0
@@ -98,19 +92,19 @@ items:
                   -
                     class: RangeSensorVisualizerItem
                     name: LiDAR
-                    translation: [ 0, 0, 0 ]
-                    rotation: [ 1, 0, 0, 0 ]
+                    is_checked: true
+                    translation: [ -0.0199254, 5.26647e-08, 0.309755 ]
+                    rotation: [ -0.015566, 0.151292, -0.988367, 0.000907501 ]
                     angle_unit: degree
                     rendering_mode: Point
                     point_size: 0
                     voxel_size: 0.01
                     is_editable: false
         -
-          id: 8
+          id: 6
           name: "Labo1"
           plugin: Body
           class: BodyItem
-          is_checked: true
           data:
             file: "${SHARE}/model/Labo1/Labo1v2.body"
             format: CHOREONOID-BODY
@@ -119,7 +113,7 @@ items:
               1, 0, 0,
               0, 1, 0,
               0, 0, 1 ]
-            jointDisplacements: [ -4.07111e-16 ]
+            jointDisplacements: [ -4.07133e-16 ]
             initialJointDisplacements: [ 0 ]
             initialRootPosition: [ 0, 0, -0.1 ]
             initialRootAttitude: [
@@ -133,7 +127,7 @@ items:
             scene_sensitive: true
             zmp: [ 0, 0, 0 ]
         -
-          id: 10
+          id: 7
           name: "AISTSimulator"
           plugin: Body
           class: AISTSimulatorItem
@@ -150,7 +144,6 @@ items:
             record_collision_data: false
             controller_options: ""
             block_scene_view_edit_mode: false
-            time_sync_items: [ 7, 9 ]
             dynamicsMode: "Forward dynamics"
             integrationMode: runge-kutta
             gravity: [ 0, 0, -9.80665 ]
@@ -167,7 +160,7 @@ items:
             oldAccelSensorMode: false
           children:
             -
-              id: 11
+              id: 8
               name: "GLVisionSimulator"
               plugin: Body
               class: GLVisionSimulatorItem
@@ -184,13 +177,6 @@ items:
                 enable_head_light: true
                 enable_additional_lights: true
                 antialiasing: false
-        -
-          id: 12
-          name: "WorldROS2"
-          plugin: ROS2
-          class: WorldROS2Item
-          data:
-            max_clock_publishing_rate: 100
 views:
   -
     id: 0
@@ -198,6 +184,8 @@ views:
     plugin: Base
     class: ImageView
     mounted: true
+    state:
+      imageable_item: [ 5, "RealSense-Image" ]
   -
     id: 1
     plugin: Base
@@ -209,7 +197,7 @@ views:
     class: ItemTreeView
     mounted: true
     state:
-      expanded: [ 1, 2, 6, 8, 10 ]
+      expanded: [ 1, 2, 5, 6, 7 ]
   -
     id: 3
     plugin: Base
@@ -241,9 +229,9 @@ views:
         -
           camera: [ System, Perspective ]
           isCurrent: true
-          eye: [ 4.73883, 1.9907, 2.20501 ]
-          direction: [ -0.841113, -0.420556, -0.34009 ]
-          up: [ -0.304186, -0.152093, 0.940393 ]
+          eye: [ 4.43531, 2.75965, 2.11931 ]
+          direction: [ -0.751801, -0.575861, -0.321215 ]
+          up: [ -0.255004, -0.195327, 0.947006 ]
         -
           camera: [ System, Orthographic ]
           orthoHeight: 20
@@ -366,7 +354,7 @@ Body:
         show_cm_projection: false
         show_zmp: false
       -
-        body_item: 8
+        body_item: 6
         show_cm: false
         show_cm_projection: false
         show_zmp: false
@@ -382,17 +370,17 @@ viewAreas:
     contents:
       type: splitter
       orientation: horizontal
-      sizes: [ 1940, 616 ]
+      sizes: [ 1087, 345 ]
       children:
         -
           type: splitter
           orientation: horizontal
-          sizes: [ 502, 1434 ]
+          sizes: [ 281, 802 ]
           children:
             -
               type: splitter
               orientation: vertical
-              sizes: [ 694, 694 ]
+              sizes: [ 446, 446 ]
               children:
                 -
                   type: pane
@@ -404,7 +392,7 @@ viewAreas:
             -
               type: splitter
               orientation: vertical
-              sizes: [ 1041, 347 ]
+              sizes: [ 669, 223 ]
               children:
                 -
                   type: pane
@@ -412,7 +400,7 @@ viewAreas:
                 -
                   type: splitter
                   orientation: horizontal
-                  sizes: [ 715, 715 ]
+                  sizes: [ 399, 399 ]
                   children:
                     -
                       type: pane
@@ -424,7 +412,7 @@ viewAreas:
         -
           type: splitter
           orientation: vertical
-          sizes: [ 316, 1072 ]
+          sizes: [ 249, 643 ]
           children:
             -
               type: pane
@@ -432,7 +420,7 @@ viewAreas:
             -
               type: splitter
               orientation: vertical
-              sizes: [ 431, 637 ]
+              sizes: [ 357, 282 ]
               children:
                 -
                   type: pane
@@ -454,5 +442,5 @@ layoutOfToolBars:
       - { name: "SceneBar", x: 0, priority: 2 }
       - { name: "GraphBar", x: 0, priority: 3 }
       - { name: "CaptureBar", x: 0, priority: 4 }
-      - { name: "DisplayValueFormatBar", x: 0, priority: 5 }
-      - { name: "ImageViewBar", x: 1649, priority: 0 }
+      - { name: "ImageViewBar", x: 1272, priority: 6 }
+      - { name: "DisplayValueFormatBar", x: 1424, priority: 5 }
