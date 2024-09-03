@@ -1,0 +1,4 @@
+<launch>
+  <include file="$(find-pkg-share choreonoid_ros2_mobile_robot_tutorial)/launch/tracks_launch.xml"/>
+  <include file="$(find-pkg-share choreonoid_ros2_mobile_robot_tutorial)/launch/display_launch.xml"/>
+</launch>

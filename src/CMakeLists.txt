@@ -8,3 +8,6 @@ ament_target_dependencies(MobileRobotDriveControllerEx rclcpp geometry_msgs)
 
 choreonoid_add_simple_controller(MobileRobotPanTiltController MobileRobotPanTiltController.cpp)
 ament_target_dependencies(MobileRobotPanTiltController rclcpp geometry_msgs)
+
+choreonoid_add_simple_controller(MobileRobotTrackController MobileRobotTrackController.cpp)
+ament_target_dependencies(MobileRobotTrackController rclcpp geometry_msgs)
