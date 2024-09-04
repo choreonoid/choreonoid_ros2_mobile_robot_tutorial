@@ -22,7 +22,7 @@ items:
           class: BodyItem
           is_checked: true
           data:
-            file: "../model/mobile_robot_pantilt.body"
+            file: "../model/mobile_robot_sensors_ex.body"
             format: CHOREONOID-BODY
             rootPosition: [ 0, 0, 0 ]
             rootAttitude: [
@@ -30,19 +30,16 @@ items:
               0, 1, 0,
               0, 0, 1 ]
             jointDisplacements: [ 0, 0, 0, 0 ]
-            jointPositions: [ 0, 0, 0, 0 ]
             initialRootPosition: [ 0, 0, 0 ]
             initialRootAttitude: [
               1, 0, 0,
               0, 1, 0,
               0, 0, 1 ]
-            initialJointPositions: [ 0, 0, 0, 0 ]
             fix_root: false
             collisionDetection: true
             selfCollisionDetection: false
             lock_location: false
             scene_sensitive: true
-            zmp: [ 0, 0, 0 ]
           children:
             -
               id: 3
@@ -68,8 +65,16 @@ items:
                 base_directory: "Controller directory"
                 reloading: false
                 export_symbols: false
+            -
+              id: 5
+              name: "BodyROS2"
+              plugin: ROS2
+              class: BodyROS2Item
+              data:
+                body_ros_version: 0
+                joint_state_update_rate: 100
         -
-          id: 5
+          id: 7
           name: "Labo1"
           plugin: Body
           class: BodyItem
@@ -83,28 +88,26 @@ items:
               0, 1, 0,
               0, 0, 1 ]
             jointDisplacements: [ 0 ]
-            jointPositions: [ 0 ]
             initialRootPosition: [ 0, 0, -0.1 ]
             initialRootAttitude: [
               1, 0, 0,
               0, 1, 0,
               0, 0, 1 ]
-            initialJointPositions: [ 0 ]
             fix_root: true
             collisionDetection: true
             selfCollisionDetection: false
-            lock_location: false
+            lock_location: true
             scene_sensitive: true
-            zmp: [ 0, 0, 0 ]
         -
-          id: 6
+          id: 9
           name: "AISTSimulator"
           plugin: Body
           class: AISTSimulatorItem
+          is_selected: true
           data:
             time_step: 0.001
             realtime_sync_mode: compensatory
-            recording: full
+            recording: tail
             time_range_mode: unlimited
             time_length: 180
             is_active_control_time_range_mode: false
@@ -114,6 +117,7 @@ items:
             record_collision_data: false
             controller_options: ""
             block_scene_view_edit_mode: false
+            time_sync_items: [ 6, 8 ]
             dynamicsMode: "Forward dynamics"
             integrationMode: runge-kutta
             gravity: [ 0, 0, -9.80665 ]
@@ -130,7 +134,7 @@ items:
             oldAccelSensorMode: false
           children:
             -
-              id: 7
+              id: 10
               name: "GLVisionSimulator"
               plugin: Body
               class: GLVisionSimulatorItem
@@ -138,30 +142,44 @@ items:
                 enabled: true
                 max_frame_rate: 1000
                 max_latency: 1
-                record_vision_data: true
+                record_vision_data: false
                 thread_mode: Sensor
                 best_effort: true
                 all_scene_objects: true
                 range_sensor_precision_ratio: 2
                 depth_error: 0
-                enable_head_light: true
+                background_color: [ 0, 0, 0 ]
+                enable_head_light: false
+                enable_world_light: false
                 enable_additional_lights: true
                 antialiasing: false
+        -
+          id: 11
+          name: "WorldROS2"
+          plugin: ROS2
+          class: WorldROS2Item
+          data:
+            max_clock_publishing_rate: 100
 views:
   -
     id: 0
+    name: "Image"
+    plugin: Base
+    class: ImageView
+  -
+    id: 1
     plugin: Base
     class: ItemPropertyView
     mounted: true
   -
-    id: 1
+    id: 2
     plugin: Base
     class: ItemTreeView
     mounted: true
     state:
-      expanded: [ 1, 2, 6 ]
+      expanded: [ 1, 2, 7, 9 ]
   -
-    id: 2
+    id: 3
     plugin: Base
     class: LocationView
     mounted: true
@@ -170,14 +188,14 @@ views:
       unique_rpy: false
       show_quaternion: false
       show_rotation_matrix: false
-      coordinate: parent
+      coordinate: world
   -
-    id: 3
+    id: 4
     plugin: Base
     class: MessageView
     mounted: true
   -
-    id: 4
+    id: 5
     plugin: Base
     class: SceneView
     mounted: true
@@ -191,9 +209,9 @@ views:
         -
           camera: [ System, Perspective ]
           isCurrent: true
-          eye: [ 3, 1.5, 1.2 ]
-          direction: [ -0.880451, -0.440225, -0.17609 ]
-          up: [ -0.1575, -0.0787497, 0.984374 ]
+          eye: [ 4.0494, 4.92233, 3.43147 ]
+          direction: [ -0.536453, -0.724816, -0.432273 ]
+          up: [ -0.257162, -0.347459, 0.901743 ]
         -
           camera: [ System, Orthographic ]
           orthoHeight: 20
@@ -201,21 +219,21 @@ views:
       culling_mode: enabled
       shading_mode: smooth
       world_light: true
-      world_light_intensity: 0.5
-      ambient_light: true
+      world_light_intensity: 0.1
+      ambient_light: false
       ambient_light_intensity: 0.5
-      head_light: true
-      head_light_intensity: 0.5
-      world_light_shadow: true
+      head_light: false
+      head_light_intensity: 0.2
+      world_light_shadow: false
       shadow_lights:
-        - { index: 0, enabled: false }
+        - { index: 0, enabled: true }
         - { index: 1, enabled: false }
-      background_color: [ 0.1, 0.1, 0.3 ]
+      background_color: [ 0.100008, 0.100008, 0.300008 ]
       line_width: 1
       point_size: 1
       field_of_view: 35
       clip_distances: [ 0.04, 200 ]
-      floorGrid: true
+      floorGrid: false
       floorGridSpan: 10
       floorGridInterval: 0.5
       xzGrid: false
@@ -228,7 +246,7 @@ views:
       xz_grid_color: [ 0.9, 0.9, 0.9 ]
       yz_grid_color: [ 0.9, 0.9, 0.9 ]
   -
-    id: 5
+    id: 6
     plugin: Body
     class: JointDisplacementView
     mounted: true
@@ -242,7 +260,7 @@ views:
       limit_ranges: false
       show_selected_joints: false
   -
-    id: 6
+    id: 7
     plugin: Body
     class: LinkDeviceListView
     mounted: true
@@ -250,7 +268,7 @@ views:
       element_type: all
       listing_mode: list
   -
-    id: 7
+    id: 8
     plugin: Body
     class: LinkPositionView
     mounted: true
@@ -263,12 +281,12 @@ views:
       show_rotation_matrix: false
       target_link_type: ik_link
   -
-    id: 8
+    id: 9
     plugin: Body
     class: LinkPropertyView
     mounted: true
   -
-    id: 9
+    id: 10
     plugin: Python
     class: PythonConsoleView
     mounted: true
@@ -276,7 +294,7 @@ toolbars:
   "TimeBar":
     current_time: 0
     min_time: 0
-    max_time: 30
+    max_time: 36.577
     frame_rate: 1000
     playback_frame_rate: 60
     idle_loop_driven_mode: false
@@ -316,7 +334,7 @@ Body:
         show_cm_projection: false
         show_zmp: false
       -
-        body_item: 5
+        body_item: 7
         show_cm: false
         show_cm_projection: false
         show_zmp: false
@@ -332,57 +350,57 @@ viewAreas:
     contents:
       type: splitter
       orientation: horizontal
-      sizes: [ 1940, 616 ]
+      sizes: [ 2058, 498 ]
       children:
         -
           type: splitter
           orientation: horizontal
-          sizes: [ 502, 1434 ]
+          sizes: [ 510, 1544 ]
           children:
             -
               type: splitter
               orientation: vertical
-              sizes: [ 735, 735 ]
+              sizes: [ 738, 736 ]
               children:
                 -
                   type: pane
-                  views: [ 1 ]
+                  views: [ 2 ]
                 -
                   type: pane
-                  views: [ 0, 8 ]
-                  current: 0
+                  views: [ 1, 9 ]
+                  current: 1
             -
               type: splitter
               orientation: vertical
-              sizes: [ 1103, 367 ]
+              sizes: [ 1071, 403 ]
               children:
                 -
                   type: pane
-                  views: [ 4 ]
+                  views: [ 5 ]
                 -
                   type: pane
-                  views: [ 3, 9 ]
-                  current: 3
+                  views: [ 4, 10 ]
+                  current: 4
         -
           type: splitter
           orientation: vertical
-          sizes: [ 335, 1135 ]
+          sizes: [ 411, 1063 ]
           children:
             -
               type: pane
-              views: [ 2 ]
+              views: [ 3 ]
             -
               type: splitter
               orientation: vertical
-              sizes: [ 456, 675 ]
+              sizes: [ 593, 466 ]
               children:
                 -
                   type: pane
-                  views: [ 7 ]
+                  views: [ 8 ]
                 -
                   type: pane
-                  views: [ 6, 5 ]
-                  current: 5
+                  views: [ 7, 6 ]
+                  current: 6
 layoutOfToolBars:
   rows:
     -
@@ -396,4 +414,5 @@ layoutOfToolBars:
       - { name: "SceneBar", x: 0, priority: 2 }
       - { name: "GraphBar", x: 0, priority: 3 }
       - { name: "CaptureBar", x: 0, priority: 4 }
-      - { name: "DisplayValueFormatBar", x: 0, priority: 5 }
+      - { name: "ImageViewBar", x: 1272, priority: 6 }
+      - { name: "DisplayValueFormatBar", x: 1424, priority: 5 }
