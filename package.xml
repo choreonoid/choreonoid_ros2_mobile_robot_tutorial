@@ -10,14 +10,14 @@
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
-  <depend>choreonoid</depend>
   <depend>choreonoid_ros</depend>
   <depend>rclcpp</depend>
   <depend>geometry_msgs</depend>
 
+  <exec_depend>rqt_robot_steering</exec_depend>
   <exec_depend>joy</exec_depend>
   <exec_depend>joy_teleop</exec_depend>
-  <exec_depend>rqt_robot_steering</exec_depend>
+  <exec_depend>image_transport_plugins</exec_depend>
   <exec_depend>xacro</exec_depend>
 
   <export>
