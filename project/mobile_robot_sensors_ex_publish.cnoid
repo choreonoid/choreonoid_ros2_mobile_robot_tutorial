@@ -74,7 +74,7 @@ items:
                 body_ros_version: 0
                 joint_state_update_rate: 100
         -
-          id: 7
+          id: 6
           name: "Labo1"
           plugin: Body
           class: BodyItem
@@ -99,11 +99,23 @@ items:
             lock_location: true
             scene_sensitive: true
         -
-          id: 9
+          id: 7
+          name: "dome"
+          plugin: Base
+          class: SceneItem
+          is_checked: true
+          data:
+            file: "${SHARE}/model/misc/dome.scen"
+            format: CHOREONOID-SCENE
+            translation: [ 0, 0, 0 ]
+            rotation: [ 1, 0, 0, 0 ]
+            angle_unit: degree
+            lightweight_rendering: false
+        -
+          id: 8
           name: "AISTSimulator"
           plugin: Body
           class: AISTSimulatorItem
-          is_selected: true
           data:
             time_step: 0.001
             realtime_sync_mode: compensatory
@@ -117,7 +129,6 @@ items:
             record_collision_data: false
             controller_options: ""
             block_scene_view_edit_mode: false
-            time_sync_items: [ 6, 8 ]
             dynamicsMode: "Forward dynamics"
             integrationMode: runge-kutta
             gravity: [ 0, 0, -9.80665 ]
@@ -134,9 +145,9 @@ items:
             oldAccelSensorMode: false
           children:
             -
-              id: 10
+              id: 9
               name: "GLVisionSimulator"
-              plugin: Body
+              plugin: GLVisionSimulator
               class: GLVisionSimulatorItem
               data:
                 enabled: true
@@ -154,7 +165,7 @@ items:
                 enable_additional_lights: true
                 antialiasing: false
         -
-          id: 11
+          id: 10
           name: "WorldROS2"
           plugin: ROS2
           class: WorldROS2Item
@@ -177,7 +188,7 @@ views:
     class: ItemTreeView
     mounted: true
     state:
-      expanded: [ 1, 2, 7, 9 ]
+      expanded: [ 1, 2, 6, 8 ]
   -
     id: 3
     plugin: Base
@@ -201,7 +212,7 @@ views:
     mounted: true
     state:
       editMode: false
-      viewpointOperationMode: thirdPerson
+      viewpointOperationMode: firstPerson
       visible_polygon_elements: [ face ]
       highlighting: false
       collisionLines: false
@@ -209,9 +220,9 @@ views:
         -
           camera: [ System, Perspective ]
           isCurrent: true
-          eye: [ 4.0494, 4.92233, 3.43147 ]
-          direction: [ -0.536453, -0.724816, -0.432273 ]
-          up: [ -0.257162, -0.347459, 0.901743 ]
+          eye: [ 0.845181, 1.62685, 0.751447 ]
+          direction: [ -0.476885, -0.838429, -0.26385 ]
+          up: [ -0.130449, -0.229347, 0.964564 ]
         -
           camera: [ System, Orthographic ]
           orthoHeight: 20
@@ -334,7 +345,7 @@ Body:
         show_cm_projection: false
         show_zmp: false
       -
-        body_item: 7
+        body_item: 6
         show_cm: false
         show_cm_projection: false
         show_zmp: false
