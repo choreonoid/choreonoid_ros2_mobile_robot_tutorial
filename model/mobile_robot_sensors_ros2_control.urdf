@@ -1,0 +1,224 @@
+<?xml version="1.0"?>
+
+<robot name="MobileRobot">
+
+  <link name="Chassis">
+    <inertial>
+      <origin rpy="0 0 0" xyz="-0.08 0 0.08"/>
+      <mass value="14.0"/>
+      <inertia ixx="0.1" ixy="0" ixz="0" iyy="0.17" iyz="0" izz="0.22"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://choreonoid_ros2_mobile_robot_tutorial/meshes/vmega_body.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://choreonoid_ros2_mobile_robot_tutorial/meshes/vmega_body.dae"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="RightWheel">
+    <inertial>
+      <mass value="0.8"/>
+      <inertia ixx="0.0012" ixy="0" ixz="0" iyy="0.0023" iyz="0" izz="0.0012"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://choreonoid_ros2_mobile_robot_tutorial/meshes/vmega_wheel.dae"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://choreonoid_ros2_mobile_robot_tutorial/meshes/vmega_wheel.dae"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="LeftWheel">
+    <inertial>
+      <mass value="0.8"/>
+      <inertia ixx="0.0012" ixy="0" ixz="0" iyy="0.0023" iyz="0" izz="0.0012"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://choreonoid_ros2_mobile_robot_tutorial/meshes/vmega_wheel.dae"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 3.14159265"/>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="package://choreonoid_ros2_mobile_robot_tutorial/meshes/vmega_wheel.dae"/>
+      </geometry>
+      <origin xyz="0 0 0" rpy="0 0 3.14159265"/>
+    </collision>
+  </link>
+
+  <link name="PanLink">
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0.03"/>
+      <mass value="1.0"/>
+      <inertia ixx="0.002" ixy="0" ixz="0" iyy="0.002" iyz="0" izz="0.003"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0.01"/>
+      <geometry>
+        <cylinder radius="0.08" length="0.02"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.5 0.5 0.5 1"/>
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="0 0.07 0.065"/>
+      <geometry>
+        <box size="0.02 0.02 0.13"/>
+      </geometry>
+      <material name="gray"/>
+    </visual>
+    <visual>
+      <origin xyz="0 -0.07 0.065"/>
+      <geometry>
+        <box size="0.02 0.02 0.13"/>
+      </geometry>
+      <material name="gray"/>
+    </visual>
+  </link>
+
+  <link name="TiltLink">
+    <inertial>
+      <mass value="1.0"/>
+      <inertia ixx="0.001" ixy="0" ixz="0" iyy="0.001" iyz="0" izz="0.002"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <cylinder radius="0.06" length="0.02"/>
+      </geometry>
+      <material name="gray"/>
+    </visual>
+  </link>
+
+  <joint name="RightWheel" type="continuous">
+    <parent link="Chassis"/>
+    <child link="RightWheel"/>
+    <origin xyz="0 -0.145 0.076" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+  <joint name="LeftWheel" type="continuous">
+    <parent link="Chassis"/>
+    <child link="LeftWheel"/>
+    <origin xyz="0 0.146 0.076" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+  <joint name="PanJoint" type="revolute">
+    <parent link="Chassis"/>
+    <child link="PanLink"/>
+    <origin xyz="-0.02 0 0.165" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-3.14" upper="3.14" velocity="1.0" effort="5"/>
+  </joint>
+
+  <joint name="TiltJoint" type="revolute">
+    <parent link="PanLink"/>
+    <child link="TiltLink"/>
+    <origin xyz="0 0 0.12" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-0.3" upper="0.3" velocity="1.0" effort="5"/>
+  </joint>
+
+  <link name="LiDAR">
+    <visual>
+      <geometry>
+        <cylinder radius="0.05" length="0.03"/>
+      </geometry>
+      <material name="blue">
+        <color rgba="0 0 1 1"/>
+      </material>
+    </visual>
+  </link>
+
+  <joint name="LiDARFixedJoint" type="fixed">
+    <origin xyz="0 0 0.025"/>
+    <parent link="TiltLink"/>
+    <child link="LiDAR"/>
+  </joint>
+
+  <link name="RealSense">
+    <visual>
+      <geometry>
+        <box size="0.064 0.022 0.024"/>
+      </geometry>
+      <material name="silver">
+        <color rgba="0.8 0.8 0.8 1" />
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="0.032 0 0"/>
+      <geometry>
+        <cylinder radius="0.011" length="0.024"/>
+      </geometry>
+      <material name="silver" />
+    </visual>
+    <visual>
+      <origin xyz="-0.032 0 0"/>
+      <geometry>
+        <cylinder radius="0.011" length="0.024"/>
+      </geometry>
+      <material name="silver" />
+    </visual>
+  </link>
+
+  <joint name="RealSenseFixedJoint" type="fixed">
+    <parent link="TiltLink"/>
+    <child link="RealSense"/>
+    <origin xyz="0.06 0 -0.02" rpy="-1.57 0 -1.57"/>
+  </joint>
+
+  <ros2_control name="MobileRobot" type="system">
+    <hardware>
+      <plugin>choreonoid_ros2_control/SystemInterfaceCnoid</plugin>
+    </hardware>
+
+    <joint name="LeftWheel">
+      <command_interface name="velocity">
+        <param name="min">-1</param>
+        <param name="max">1</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="RightWheel">
+      <command_interface name="velocity">
+        <param name="min">-1</param>
+        <param name="max">1</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+
+    <joint name="PanJoint">
+      <command_interface name="position">
+        <param name="min">-3.14</param>
+        <param name="max">3.14</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+    <joint name="TiltJoint">
+      <command_interface name="position">
+        <param name="min">-0.3</param>
+        <param name="max">0.3</param>
+      </command_interface>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+      <state_interface name="effort"/>
+    </joint>
+  </ros2_control>
+</robot>

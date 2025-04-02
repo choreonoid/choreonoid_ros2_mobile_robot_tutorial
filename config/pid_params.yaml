@@ -1,0 +1,9 @@
+choreonoid_ros2_control:
+  ros__parameters:
+    gains:
+      # velocity servo (velocity reference / effort actuation)
+      LeftWheel: { p: 1.0, d: 0.0 }
+      RightWheel: { p: 1.0, d: 0.0 }
+      # position servo (position reference / effort actuation)
+      PanJoint: { p: 0.5, d: 0.1 }
+      TiltJoint: { p: 0.5, d: 0.1 }
