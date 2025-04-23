@@ -4,14 +4,14 @@
     "mainwindow": {
       "keys": {
         "geometry": {
-          "repr(QByteArray.hex)": "QtCore.QByteArray(b'01d9d0cb000300000000006400000064000003710000024a0000006400000089000003710000024a000000000000000007800000006400000089000003710000024a')",
+          "repr(QByteArray.hex)": "QtCore.QByteArray(b'01d9d0cb00030000000002500000047d000006c2000007c200000250000004a4000006c2000007c200000000000000000f0000000250000004a4000006c2000007c2')",
           "type": "repr(QByteArray.hex)",
-          "pretty-print": "     d d q J d   q J      d   q J"
+          "pretty-print": "     P }     P            P      "
         },
         "state": {
-          "repr(QByteArray.hex)": "QtCore.QByteArray(b'000000ff00000000fd00000001000000030000030e00000198fc0100000002fb0000006a007200710074005f0072006f0062006f0074005f007300740065006500720069006e0067005f005f0052006f0062006f0074005300740065006500720069006e0067005f005f0031005f005f0052006f0062006f0074005300740065006500720069006e0067005500690100000000000001a7000000d800fffffffb000000b4007200710074005f006a006f0069006e0074005f007400720061006a006500630074006f00720079005f0063006f006e00740072006f006c006c00650072005f005f004a006f0069006e0074005400720061006a006500630074006f007200790043006f006e00740072006f006c006c00650072005f005f0031005f005f004a006f0069006e0074005400720061006a006500630074006f007200790043006f006e00740072006f006c006c006500720055006901000001ad000001610000010e00ffffff0000030e0000000000000004000000040000000800000008fc00000001000000030000000100000036004d0069006e0069006d0069007a006500640044006f0063006b00570069006400670065007400730054006f006f006c0062006100720000000000ffffffff0000000000000000')",
+          "repr(QByteArray.hex)": "QtCore.QByteArray(b'000000ff00000000fd000000010000000300000473000002dffc0100000003fb00000042007200710074005f007300720076005f005f00530065007200760069006300650073005f005f0031005f005f006d0065007300730061006700650073002e007500690100000000000002660000000000000000fb0000006a007200710074005f0072006f0062006f0074005f007300740065006500720069006e0067005f005f0052006f0062006f0074005300740065006500720069006e0067005f005f0031005f005f0052006f0062006f0074005300740065006500720069006e0067005500690100000000000002b40000011900fffffffb000000b4007200710074005f006a006f0069006e0074005f007400720061006a006500630074006f00720079005f0063006f006e00740072006f006c006c00650072005f005f004a006f0069006e0074005400720061006a006500630074006f007200790043006f006e00740072006f006c006c00650072005f005f0031005f005f004a006f0069006e0074005400720061006a006500630074006f007200790043006f006e00740072006f006c006c006500720055006901000002bb000001b80000017600ffffff000004730000000000000004000000040000000800000008fc00000001000000030000000100000036004d0069006e0069006d0069007a006500640044006f0063006b00570069006400670065007400730054006f006f006c0062006100720000000000ffffffff0000000000000000')",
           "type": "repr(QByteArray.hex)",
-          "pretty-print": "                 jrqt_robot_steering__RobotSteering__1__RobotSteeringUi           rqt_joint_trajectory_controller__JointTrajectoryController__1__JointTrajectoryControllerUi                            6MinimizedDockWidgetsToolbar        "
+          "pretty-print": "                 Brqt_srv__Services__1__messages.ui          jrqt_robot_steering__RobotSteering__1__RobotSteeringUi           rqt_joint_trajectory_controller__JointTrajectoryController__1__JointTrajectoryControllerUi                            6MinimizedDockWidgetsToolbar        "
         }
       },
       "groups": {
@@ -57,11 +57,11 @@
             "plugin": {
               "keys": {
                 "cm_ns": {
-                  "repr": "[]",
+                  "repr": "'/controller_manager'",
                   "type": "repr"
                 },
                 "jtc_name": {
-                  "repr": "[]",
+                  "repr": "'joint_trajectory_controller'",
                   "type": "repr"
                 }
               },
@@ -96,7 +96,7 @@
                   "type": "repr"
                 },
                 "topic": {
-                  "repr": "'/cmd_vel'",
+                  "repr": "'/base_controller/cmd_vel'",
                   "type": "repr"
                 },
                 "vw_max": {
@@ -113,6 +113,28 @@
                 },
                 "vx_min": {
                   "repr": "-1.0",
+                  "type": "repr"
+                }
+              },
+              "groups": {}
+            }
+          }
+        },
+        "plugin__rqt_srv__Services__1": {
+          "keys": {},
+          "groups": {
+            "dock_widget__messages.ui": {
+              "keys": {
+                "dock_widget_title": {
+                  "repr": "'Service Type Browser'",
+                  "type": "repr"
+                },
+                "dockable": {
+                  "repr": "'true'",
+                  "type": "repr"
+                },
+                "parent": {
+                  "repr": "None",
                   "type": "repr"
                 }
               },

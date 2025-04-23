@@ -6,7 +6,6 @@
   <node pkg="choreonoid_ros" exec="choreonoid"
     args="--start-simulation $(find-pkg-share choreonoid_ros2_mobile_robot_tutorial)/project/mobile_robot_drive_ros2_control.cnoid">
     <param from="$(find-pkg-share choreonoid_ros2_mobile_robot_tutorial)/config/ros2_controllers.yaml"/>
-    <remap from="base_controller/cmd_vel" to="/cmd_vel"/>
   </node>
 
   <!-- robot state publisher -->
@@ -16,9 +15,8 @@
   </node>
 
   <!-- controller spawner -->
-  <node pkg="controller_manager" exec="spawner" name="controller_spawner" args="joint_state_broadcaster base_controller joint_trajectory_controller">
-    <param name="use_sim_time" value="true" />
+  <node pkg="controller_manager" exec="spawner" name="controller_spawner" args="joint_state_broadcaster base_controller joint_trajectory_controller --param-file $(find-pkg-share choreonoid_ros2_mobile_robot_tutorial)/config/ros2_controllers.yaml">
   </node>
 
-  <node pkg="rqt_gui" exec="rqt_gui" name="rqt" args="--perspective-file $(find-pkg-share choreonoid_ros2_mobile_robot_tutorial)/config/control.perspective"/>
+  <node pkg="rqt_gui" exec="rqt_gui" name="rqt" args="--perspective-file $(find-pkg-share choreonoid_ros2_mobile_robot_tutorial)/config/control.perspective --clear-config"/>
 </launch>

@@ -180,7 +180,7 @@
 
   <ros2_control name="MobileRobot" type="system">
     <hardware>
-      <plugin>choreonoid_ros2_control/SystemInterfaceCnoid</plugin>
+      <plugin>choreonoid_ros2_control/BodySystemInterface</plugin>
     </hardware>
 
     <joint name="LeftWheel">
