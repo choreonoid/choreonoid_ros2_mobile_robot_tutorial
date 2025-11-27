@@ -180,6 +180,7 @@ views:
       world_light_intensity: 0.5
       ambient_light: true
       ambient_light_intensity: 0.5
+      material_ambient_normalization: false
       head_light: true
       head_light_intensity: 0.5
       world_light_shadow: true
